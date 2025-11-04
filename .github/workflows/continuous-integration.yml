@@ -54,7 +54,7 @@ jobs:
       - name: Change versions to match tag
         run: ci/change_version.sh -m .
       - name: Compile & build
-        run: ./mvnw -B install -DskipTests -Djacoco.skip -T 1C
+        run: ./mvnw -B install -DskipTests -Djacoco.skip -T 2C
       - name: Populate cache
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
@@ -115,7 +115,7 @@ jobs:
           yarn lint
           yarn build:prod
       - name: Build maven artifact
-        run: ./mvnw -B install -pl :kadai-web -am -T 1C
+        run: ./mvnw -B install -pl :kadai-web -am -T 2C
       - name: Upload kadai-web dist artifact
         uses: actions/upload-artifact@v5
         with:
@@ -315,7 +315,7 @@ jobs:
         run: |
           ci/change_version.sh -m .
       - name: Test
-        run: ./mvnw -B verify -pl :${{matrix.module}} -Dcheckstyle.skip -T 1C
+        run: ./mvnw -B verify -pl :${{matrix.module}} -Dcheckstyle.skip -T 2C
         env:
           DB: ${{ matrix.database }}
       - name: Upload JaCoCo Report
